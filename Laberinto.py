@@ -82,16 +82,32 @@ def heuristica(nodo_actual, meta):
     """Calcula la distancia Manhattan entre dos puntos a y b."""
     return abs(nodo_actual[0] - meta[0]) + abs(nodo_actual[1] - meta[1])
 
+def recalcular_coste_nodos(nodo_frontera,nuevocosto,end):
+    #print("Nuevo costo")
+    #nodo_frontera.mostrar()
+    nodo_frontera_aux = ColaPrioridad()
+    while not nodo_frontera.estaVacia():
+        #print("Aqui")
+        nodo_actual = nodo_frontera.quitar()
+        prioridad = nuevocosto + heuristica(nodo_actual[0], end)
+        nodo_frontera_aux.insertar(nodo_actual[0],prioridad)
+    while not nodo_frontera_aux.estaVacia():
+        nodo_actual = nodo_frontera_aux.quitar()
+        nodo_frontera.insertar(nodo_actual[0],nodo_actual[1])
+
 def alforitmo_a_estrella(laberinto,start,end):
     nodo_inicial = start
     nodo_frontera = ColaPrioridad()
     nodos_visitados = Lista()
     nodo_frontera.insertar(nodo_inicial,0)
-    
+    nuevo_costo = 1
     while not nodo_frontera.estaVacia():
         #Calcular el valor F(n) = g(n)+h(n) para cada nodo frontera
         #Ordenar la lista nodos_frontera según f(n)
+        if not nodo_frontera.estaVacia(): 
+           recalcular_coste_nodos(nodo_frontera,0,end)
         nodo_frontera.ordenar()
+
         nodo_actual = nodo_frontera.quitar()
         #print(nodo_actual)
         
@@ -105,7 +121,7 @@ def alforitmo_a_estrella(laberinto,start,end):
     
         nodo_hijo = mov_derecha(nodo_actual[0],laberinto)
         
-        nuevo_costo = nodo_actual[1] + 1  # Asumiendo que el costo de cada movimiento es 1
+        nuevo_costo += 1  # Asumiendo que el costo de cada movimiento es 1
         
         if  nodo_hijo != None and not nodos_visitados.existe_elemento(nodo_hijo):
             if nodo_frontera.existe_elemento(nodo_hijo):
@@ -120,7 +136,7 @@ def alforitmo_a_estrella(laberinto,start,end):
 
         del(nodo_hijo)
 
-
+        nuevo_costo += 1
         nodo_hijo = mov_izquierda(nodo_actual[0],laberinto)
         if  nodo_hijo != None and not nodos_visitados.existe_elemento(nodo_hijo):
             
@@ -132,7 +148,7 @@ def alforitmo_a_estrella(laberinto,start,end):
             else:
                 nodo_frontera.insertar(nodo_hijo,nuevo_costo)
         del(nodo_hijo)
-
+        nuevo_costo += 1
         nodo_hijo = mov_arriba(nodo_actual[0],laberinto)
         if  nodo_hijo != None and not nodos_visitados.existe_elemento(nodo_hijo):
             if nodo_frontera.existe_elemento(nodo_hijo):
@@ -143,6 +159,7 @@ def alforitmo_a_estrella(laberinto,start,end):
             else:
                 nodo_frontera.insertar(nodo_hijo,nuevo_costo)
         del(nodo_hijo)
+        nuevo_costo += 1
         nodo_hijo = mov_abajo(nodo_actual[0],laberinto)
         #print(nodo_hijo)
         #nodos_visitados.imprimir_lista()
@@ -156,14 +173,15 @@ def alforitmo_a_estrella(laberinto,start,end):
             else:
                 
                 nodo_frontera.insertar(nodo_hijo,nuevo_costo)
-                
+        #nodo_frontera.mostrar()
+        #input("ciclo: ")
         #nodo_frontera.mostrar()
         
 
 def run_laberinto():
     # Posición de inicio y salida
-    start =(0,0) #(0, 1)  # Coordenadas (fila, columna) de inicio
-    end = (9,9)#(3, 4)    # Coordenadas (fila, columna) de salida
+    start =  (0,0)# (0, 1)  # Coordenadas (fila, columna) de inicio
+    end = (9,9) #(3, 4)    # Coordenadas (fila, columna) de salida
     laberinto = generar_laberinto_grande()
     mostrar_laberinto(laberinto)
     if validar_posiciones_entrada_salida(laberinto,start,end):

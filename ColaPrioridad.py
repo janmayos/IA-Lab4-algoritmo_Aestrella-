@@ -37,7 +37,8 @@ class ColaPrioridad:
         for i, tupla in enumerate(self.items):
             if tupla[0] == elemento:
                 indice = i
-            break  # Salir del bucle al encontrar el primer índice que coincida
+                break  # Salir del bucle al encontrar el primer índice que coincida
+
         self.items[indice] = (elemento,coste)
                 
         
@@ -45,7 +46,7 @@ class ColaPrioridad:
     def ordenar(self):
         """Ordena la cola por prioridad en orden ascendente (mayor prioridad primero)."""
         # Ordenar por la segunda parte de la tupla que es la prioridad self.items.sort(key=lambda x: x[1])
-        self.items.sort(key=lambda x: x[1])
+        self.items.sort(key=lambda x: x[1])#reverse=True
         
 
     def mostrar(self):
