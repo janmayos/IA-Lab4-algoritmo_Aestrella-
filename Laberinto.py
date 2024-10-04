@@ -179,6 +179,7 @@ def alforitmo_a_estrella(laberinto,start,end):
 
 def run_laberinto():
     inicio = time.time()
+<<<<<<< HEAD
     # Posición de inicio y salida
     start =  (0, 1)  # Coordenadas (fila, columna) de inicio
     end = (3, 4)    # Coordenadas (fila, columna) de salida
@@ -198,6 +199,9 @@ def run_laberinto():
 
 def run_laberinto_grande():
     inicio = time.time()
+=======
+
+>>>>>>> master
     # Posición de inicio y salida
     start =  (0,0)# (0, 1)  # Coordenadas (fila, columna) de inicio
     end = (9,9) #(3, 4)    # Coordenadas (fila, columna) de salida
@@ -214,6 +218,10 @@ def run_laberinto_grande():
         print("Modificar valores de start y end")
     fin = time.time()
     print("Tiempo de ejecución: %.10f segundos." % (fin-inicio))
+<<<<<<< HEAD
+=======
+    
+>>>>>>> master
 
 
 if __name__ == '__main__':
