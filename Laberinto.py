@@ -1,7 +1,7 @@
 from ColaPrioridad import ColaPrioridad
 from Pila import Pila
 from Lista import Lista
-
+import time
 # Representación del laberinto
 
 # 0 = camino, 1 = pared
@@ -178,6 +178,7 @@ def alforitmo_a_estrella(laberinto,start,end):
         
 
 def run_laberinto():
+    inicio = time.time()
     # Posición de inicio y salida
     start =  (0, 1)  # Coordenadas (fila, columna) de inicio
     end = (3, 4)    # Coordenadas (fila, columna) de salida
@@ -192,8 +193,11 @@ def run_laberinto():
             print("No hay camino hacia la meta")
     else:
         print("Modificar valores de start y end")
+    fin = time.time()
+    print("Tiempo de ejecución: %.10f segundos." % (fin-inicio))
 
 def run_laberinto_grande():
+    inicio = time.time()
     # Posición de inicio y salida
     start =  (0,0)# (0, 1)  # Coordenadas (fila, columna) de inicio
     end = (9,9) #(3, 4)    # Coordenadas (fila, columna) de salida
@@ -208,6 +212,8 @@ def run_laberinto_grande():
             print("No hay camino hacia la meta")
     else:
         print("Modificar valores de start y end")
+    fin = time.time()
+    print("Tiempo de ejecución: %.10f segundos." % (fin-inicio))
 
 
 if __name__ == '__main__':
