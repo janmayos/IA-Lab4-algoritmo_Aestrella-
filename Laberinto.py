@@ -105,12 +105,11 @@ def alforitmo_a_estrella(laberinto,start,end):
         #Calcular el valor F(n) = g(n)+h(n) para cada nodo frontera
         #Ordenar la lista nodos_frontera según f(n)
         if not nodo_frontera.estaVacia(): 
-           recalcular_coste_nodos(nodo_frontera,0,end)
+            recalcular_coste_nodos(nodo_frontera,0,end)
         nodo_frontera.ordenar()
 
         nodo_actual = nodo_frontera.quitar()
         #print(nodo_actual)
-        
         #nodos_visitados.imprimir_lista()
         nodos_visitados.push(nodo_actual[0])
         
@@ -180,7 +179,29 @@ def alforitmo_a_estrella(laberinto,start,end):
 
 def run_laberinto():
     inicio = time.time()
+<<<<<<< HEAD
+    # Posición de inicio y salida
+    start =  (0, 1)  # Coordenadas (fila, columna) de inicio
+    end = (3, 4)    # Coordenadas (fila, columna) de salida
+    laberinto = generar_laberinto()
+    mostrar_laberinto(laberinto)
+    if validar_posiciones_entrada_salida(laberinto,start,end):
+        print("Empezamos")
+        valores = alforitmo_a_estrella(laberinto,start,end)
+        if valores != None:
+            print(valores)
+        else:
+            print("No hay camino hacia la meta")
+    else:
+        print("Modificar valores de start y end")
+    fin = time.time()
+    print("Tiempo de ejecución: %.10f segundos." % (fin-inicio))
 
+def run_laberinto_grande():
+    inicio = time.time()
+=======
+
+>>>>>>> master
     # Posición de inicio y salida
     start =  (0,0)# (0, 1)  # Coordenadas (fila, columna) de inicio
     end = (9,9) #(3, 4)    # Coordenadas (fila, columna) de salida
@@ -197,7 +218,10 @@ def run_laberinto():
         print("Modificar valores de start y end")
     fin = time.time()
     print("Tiempo de ejecución: %.10f segundos." % (fin-inicio))
+<<<<<<< HEAD
+=======
     
+>>>>>>> master
 
 
 if __name__ == '__main__':
